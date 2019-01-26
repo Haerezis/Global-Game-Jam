@@ -24,9 +24,6 @@ public class Player : MonoBehaviour
   [Header("Animation")]
   public Animator animator;
 
-  // constants:
-  // BLA BLAH
-
   // state:
   protected Vector2 velocity;
 
@@ -36,22 +33,16 @@ public class Player : MonoBehaviour
   protected bool has_air_jumped = false;
   protected bool facing_right = true;
 
-  // inputs:
-  protected Vector2 input;
-
   // misc:
   protected Rigidbody2D rgbd;
   protected ContactPoint2D[] contacts = new ContactPoint2D[10];
+  protected SpriteRenderer renderer;
 
   void Awake() {
     this.rgbd = this.gameObject.GetComponent<Rigidbody2D>();
+    this.renderer = this.gameObject.GetComponent<SpriteRenderer>();
   }
   
-  // Start is called before the first frame update
-  void Start()
-  {
-  }
-
   // Update is called once per frame
   void Update()
   {
@@ -139,6 +130,25 @@ public class Player : MonoBehaviour
     }
   }
 
+  public void die() {
+    // Death animation
+    this.rgbd.velocity = Vector2.zero;
+    this.rgbd.isKinematic = true;
+    this.renderer.enabled = false;
+  }
+
+  public void spawn(Vector2 position) {
+    this.grounded = false;
+    this.wall_sliding = false;
+    this.has_air_jumped = false;
+    this.facing_right = true;
+
+    this.rgbd.isKinematic = false;
+    this.rgbd.velocity = Vector2.zero;
+    this.rgbd.position = position;
+    this.renderer.enabled = true;
+  }
+
   protected void animate() {
     if (grounded) {
       animator.SetBool("jumping", false);
@@ -166,8 +176,7 @@ public class Player : MonoBehaviour
 
   }
 
-  protected void flip()
-  {
+  protected void flip() {
     // Switch the way the player is labelled as facing.
     facing_right = !facing_right;
 
