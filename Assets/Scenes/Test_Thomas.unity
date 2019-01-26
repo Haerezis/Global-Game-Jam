@@ -168,6 +168,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1131939550604615569, guid: 2af74562a267b40ff94b804978269bf5,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: c7fe33a0693d025eeb6be48fd22f9f0a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2af74562a267b40ff94b804978269bf5, type: 3}
 --- !u!1 &845913429
@@ -7288,7 +7293,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 931231140}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c7fe33a0693d025eeb6be48fd22f9f0a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
