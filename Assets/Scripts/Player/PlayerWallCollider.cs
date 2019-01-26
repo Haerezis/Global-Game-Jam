@@ -19,18 +19,17 @@ public class PlayerWallCollider : MonoBehaviour
 
   void OnCollisionEnter2D(Collision2D coll)
   {
-    Vector2 dir = (coll.GetContact(0).point - (Vector2)transform.position);
-    player.setWallSliding(true, (dir.x > 0) ? Vector2.right : Vector2.left);
+    player.OnWallCollisionEnter(coll);
   }
 
-  void OnCollisionStay2D(Collision2D coll)
-  {
-    Vector2 dir = (coll.GetContact(0).point - (Vector2)transform.position);
-    player.setWallSliding(true, (dir.x > 0) ? Vector2.right : Vector2.left);
-  }
+  //void OnCollisionStay2D(Collision2D coll)
+  //{
+    //Vector2 dir = (coll.GetContact(0).point - (Vector2)transform.position);
+    //player.setWallSliding(true, (dir.x > 0) ? Vector2.right : Vector2.left);
+  //}
 
   void OnCollisionExit2D(Collision2D coll)
   {
-    player.setWallSliding(false, Vector2.zero);
+    player.OnWallCollisionExit(coll);
   }
 }

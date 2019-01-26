@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
 
     rgbd.MovePosition(rgbd.position + velocity * Time.deltaTime);
   }
-
+  
   public void setGrounded(bool val) {
     this.grounded = val;
 
@@ -120,4 +120,20 @@ public class Player : MonoBehaviour
       hasAirJumped = false;
     }
   }
+
+  public void OnGroundCollisionEnter(Collision2D coll) {
+    setGrounded(true);
+  }
+  public void OnGroundCollisionExit(Collision2D coll) {
+    setGrounded(false);
+  }
+  
+  public void OnWallCollisionEnter(Collision2D coll) {
+    Vector2 dir = (coll.GetContact(0).point - (Vector2)transform.position);
+    setWallSliding(true, (dir.x > 0) ? Vector2.right : Vector2.left);
+  }
+  public void OnWallCollisionExit(Collision2D coll) {
+    setWallSliding(false, Vector2.zero);
+  }
+
 }

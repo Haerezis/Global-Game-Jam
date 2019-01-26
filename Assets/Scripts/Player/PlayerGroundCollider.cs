@@ -19,11 +19,11 @@ public class PlayerGroundCollider : MonoBehaviour
 
   void OnCollisionEnter2D(Collision2D coll)
   {
-    player.setGrounded(true);
+    player.OnGroundCollisionEnter(coll);
   }
 
   void OnCollisionExit2D(Collision2D coll)
   {
-    player.setGrounded(false);
+    player.OnGroundCollisionExit(coll);
   }
 }
