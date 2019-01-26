@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-  public LayerMask groundLayer;
-
   [Header("Movement")]
   public float horizontal_ground_speed = 1.0f;
   [Range(0, 1f)]
@@ -16,8 +14,11 @@ public class Player : MonoBehaviour
   public float gravity_coefficient = 1.0f;
   [Range(0, 1f)]
   public float air_drag = 0.05f;
+  public float max_fall_speed = 30.0f;
+  [Header("Air Jump")]
+  // air_jump_speed => jump_speed * air_jump_speed_coeff
+  public float air_jump_speed_coefficient = 1.0f;
 
-  public float distance = 1.0f;
   // constants:
   // BLA BLAH
 
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
 
   protected bool grounded = false;
   protected bool wallSliding = false;
-  protected bool jumping = false;
+  protected bool hasAirJumped = false;
 
   // inputs:
   protected Vector2 input;
@@ -73,6 +74,10 @@ public class Player : MonoBehaviour
       if (grounded) {
         velocity.y = jump_speed;
       }
+      else if (!hasAirJumped) {
+        velocity.y = jump_speed * air_jump_speed_coefficient;
+        hasAirJumped = true;
+      }
     }
 
     // gravity:
@@ -82,12 +87,20 @@ public class Player : MonoBehaviour
     else if (velocity.y < 0) {
       velocity.y = 0.0f;
     }
-    Debug.Log(velocity);
+
+    //Handle max fall speed.
+    if (velocity.y < -max_fall_speed) {
+      velocity.y = -max_fall_speed;
+    }
 
     rgbd.MovePosition(rgbd.position + velocity * Time.deltaTime);
   }
 
   public void setGrounded(bool val) {
     this.grounded = val;
+
+    if (!this.grounded) {
+      hasAirJumped = false;
+    }
   }
 }
