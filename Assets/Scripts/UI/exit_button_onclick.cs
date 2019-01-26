@@ -15,7 +15,10 @@ public class exit_button_onclick : MonoBehaviour
 
     void ExitOnClick()
     {
-        Application.Quit();
-        Debug.Log("Application successfully quitted");
+        if (!Input.GetButtonDown("Jump"))
+        {
+            Application.Quit();
+            Debug.Log("Application successfully quitted");
+        }
     }
 }

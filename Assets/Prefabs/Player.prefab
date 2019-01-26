@@ -419,14 +419,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4070ddbae8a3cce2b22d2a669682fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontal_ground_speed: 20
+  horizontal_ground_speed: 18
   ground_drag: 0.4
   jump_speed: 20
-  horizontal_air_speed: 17
+  horizontal_air_speed: 14
   gravity_coefficient: 0.1
   air_drag: 0.35
   max_fall_speed: 30
-  air_jump_speed_coefficient: 1
+  air_jump_speed_coefficient: 0.75
   wall_jump_speed_y: 15
   wall_jump_speed_x: 40
   animator: {fileID: 0}

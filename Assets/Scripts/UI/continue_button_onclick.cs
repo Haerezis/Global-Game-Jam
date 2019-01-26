@@ -22,14 +22,18 @@ public class continue_button_onclick : MonoBehaviour
     // Update is called once per frame
     void ContinueOnClick()
     {
-        using (Stream stream = File.Open("Assets/save.txt", FileMode.Open))
-        using (TextReader sr = new StreamReader(stream, Encoding.UTF8))
+        if (!(Input.GetButtonDown("Jump")))
         {
-            string levelScene;
-            if ((levelScene = sr.ReadLine()) != null)
+
+            using (Stream stream = File.Open("Assets/save.txt", FileMode.Open))
+            using (TextReader sr = new StreamReader(stream, Encoding.UTF8))
             {
-                SceneManager.LoadScene(levelScene);
-                Debug.Log("SceneLoaded");
+                string levelScene;
+                if ((levelScene = sr.ReadLine()) != null)
+                {
+                    SceneManager.LoadScene(levelScene);
+                    Debug.Log("SceneLoaded");
+                }
             }
         }
     }
