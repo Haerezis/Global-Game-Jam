@@ -22,12 +22,15 @@ public class newgame_button_onclick : MonoBehaviour
     // Update is called once per frame
     void NewGameOnClick()
     {
-        using (Stream stream = File.Open("Assets/save.txt", FileMode.Truncate, FileAccess.Write))
-        using (TextWriter wr = new StreamWriter(stream, Encoding.UTF8))
+        if (!Input.GetButtonDown("Jump"))
         {
-            wr.Write("MainMenuScene");
-            SceneManager.LoadScene("MainMenuScene");
-            Debug.Log("Rewritted file");
+            using (Stream stream = File.Open("Assets/save.txt", FileMode.Truncate, FileAccess.Write))
+            using (TextWriter wr = new StreamWriter(stream, Encoding.UTF8))
+            {
+                wr.Write("MainMenuScene");
+                SceneManager.LoadScene("MainMenuScene");
+                Debug.Log("Rewritted file");
+            }
         }
     }
 }
