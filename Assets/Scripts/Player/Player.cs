@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
   protected bool grounded = false;
   protected bool wall_sliding = false;
   protected Vector2 wall_side;
-  protected bool hasAirJumped = false;
+  protected bool has_air_jumped = false;
 
   // inputs:
   protected Vector2 input;
@@ -82,15 +82,15 @@ public class Player : MonoBehaviour
       else if (grounded) {
         velocity.y = jump_speed;
       }
-      else if (!hasAirJumped) {
+      else if (!has_air_jumped) {
         velocity.y = jump_speed * air_jump_speed_coefficient;
-        hasAirJumped = true;
+        has_air_jumped = true;
       }
     }
 
     // gravity:
     if (!grounded) {
-      velocity += Physics2D.gravity * gravity_coefficient * Time.deltaTime;
+      velocity += Physics2D.gravity * gravity_coefficient;
     }
     else if (velocity.y < 0) {
       velocity.y = 0.0f;
@@ -101,14 +101,14 @@ public class Player : MonoBehaviour
       velocity.y = -max_fall_speed;
     }
 
-    rgbd.MovePosition(rgbd.position + velocity * Time.deltaTime);
+    rgbd.velocity = velocity;
   }
   
   public void setGrounded(bool val) {
     this.grounded = val;
 
     if (!this.grounded) {
-      hasAirJumped = false;
+      has_air_jumped = false;
     }
   }
 
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
     this.wall_side = side;
 
     if (this.wall_sliding) {
-      hasAirJumped = false;
+      has_air_jumped = false;
     }
   }
 
@@ -130,7 +130,9 @@ public class Player : MonoBehaviour
   
   public void OnWallCollisionEnter(Collision2D coll) {
     Vector2 dir = (coll.GetContact(0).point - (Vector2)transform.position);
-    setWallSliding(true, (dir.x > 0) ? Vector2.right : Vector2.left);
+    dir = (dir.x > 0) ? Vector2.right : Vector2.left;
+
+    setWallSliding(true, dir);
   }
   public void OnWallCollisionExit(Collision2D coll) {
     setWallSliding(false, Vector2.zero);
