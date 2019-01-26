@@ -24,6 +24,11 @@ public class Player : MonoBehaviour
   [Header("Animation")]
   public Animator animator;
 
+  [Header("Particule Dash")]
+  public float bullet_time_coeficient = 0.01f;
+  public float bullet_time_timeout = 4.0f;
+  public float dash_speed = 40.0f;
+
   // state:
   protected Vector2 velocity;
 
@@ -33,14 +38,17 @@ public class Player : MonoBehaviour
   protected bool has_air_jumped = false;
   protected bool facing_right = true;
 
+  protected bool bullet_time_active = false;
+  protected GameObject dash_particule = null;
+
   // misc:
   protected Rigidbody2D rgbd;
   protected ContactPoint2D[] contacts = new ContactPoint2D[10];
-  protected SpriteRenderer renderer;
+  protected SpriteRenderer sprite_renderer;
 
   void Awake() {
     this.rgbd = this.gameObject.GetComponent<Rigidbody2D>();
-    this.renderer = this.gameObject.GetComponent<SpriteRenderer>();
+    this.sprite_renderer = this.gameObject.GetComponent<SpriteRenderer>();
   }
   
   void Update()
@@ -50,43 +58,52 @@ public class Player : MonoBehaviour
 
   protected void ComputeVelocity()
   {
-    float x_movement = Input.GetAxis ("Horizontal");
+    if (Input.GetButtonDown("Fire1") && this.dash_particule != null) {
+      this.beginParticuleDash();
+      //this.endParticuleDash((Vector2.right + Vector2.up).normalized);
+    }
 
-    if (Mathf.Abs(x_movement) >= 0.05f) {
+    float x_movement = 0.0f;
+    
+    if (!this.bullet_time_active) {
+      x_movement = Input.GetAxis ("Horizontal");
+
+      if (Mathf.Abs(x_movement) >= 0.05f) {
+        if (grounded) {
+          velocity.x = x_movement * horizontal_ground_speed;
+        }
+        else {
+          velocity.x = x_movement * horizontal_air_speed;
+        }
+      }
+
+
       if (grounded) {
-        velocity.x = x_movement * horizontal_ground_speed;
+        velocity.x *= 1.0f - ground_drag;
       }
       else {
-        velocity.x = x_movement * horizontal_air_speed;
+        velocity.x *= 1.0f - air_drag;
       }
-    }
 
-
-    if (grounded) {
-      velocity.x *= 1.0f - ground_drag;
-    }
-    else {
-      velocity.x *= 1.0f - air_drag;
-    }
-
-    // Handle Jumps (normal, air, wall)
-    if (Input.GetButtonDown ("Jump")) {
-      if (wall_sliding) {
-        velocity.x = wall_jump_speed_x * (-1) * wall_side.x;
-        velocity.y = wall_jump_speed_y;
-      }
-      else if (grounded) {
-        velocity.y = jump_speed;
-      }
-      else if (!has_air_jumped) {
-        velocity.y = jump_speed * air_jump_speed_coefficient;
-        has_air_jumped = true;
+      // Handle Jumps (normal, air, wall)
+      if (Input.GetButtonDown ("Jump")) {
+        if (wall_sliding) {
+          velocity.x = wall_jump_speed_x * (-1) * wall_side.x;
+          velocity.y = wall_jump_speed_y;
+        }
+        else if (grounded) {
+          velocity.y = jump_speed;
+        }
+        else if (!has_air_jumped) {
+          velocity.y = jump_speed * air_jump_speed_coefficient;
+          has_air_jumped = true;
+        }
       }
     }
 
     // gravity:
     if (!grounded) {
-      velocity += Physics2D.gravity * gravity_coefficient;
+      velocity += Physics2D.gravity * gravity_coefficient * Time.timeScale;
     }
     else if (velocity.y < 0) {
       velocity.y = 0.0f;
@@ -134,7 +151,7 @@ public class Player : MonoBehaviour
     // Death animation
     this.rgbd.velocity = Vector2.zero;
     this.rgbd.isKinematic = true;
-    this.renderer.enabled = false;
+    this.sprite_renderer.enabled = false;
   }
 
   // Spawn the player at the given position.
@@ -147,7 +164,7 @@ public class Player : MonoBehaviour
     this.rgbd.isKinematic = false;
     this.rgbd.velocity = Vector2.zero;
     this.rgbd.position = position;
-    this.renderer.enabled = true;
+    this.sprite_renderer.enabled = true;
   }
 
   // Set animator parameters to display the right animation
@@ -189,13 +206,56 @@ public class Player : MonoBehaviour
     transform.localScale = theScale;
   }
 
+  public void setDashParticule(GameObject particule) {
+    if (this.dash_particule != null) {
+      if (this.dash_particule.GetInstanceID() != particule.GetInstanceID()) {
+        return;
+      }
+
+      float distance = Vector2.Distance(particule.transform.position, this.transform.position);
+      float current_distance = Vector2.Distance(this.dash_particule.transform.position, this.transform.position);
+
+      if (distance < current_distance) {
+        this.dash_particule = particule;
+      }
+    }
+    else {
+      this.dash_particule = particule;
+    }
+  }
+
+  public void unsetDashParticule(GameObject particule) {
+    if ((particule == this.dash_particule) && !this.bullet_time_active) {
+      this.dash_particule = null;
+    }
+  }
+
+  public void beginParticuleDash() {
+    this.bullet_time_active = true;
+
+    Time.timeScale = bullet_time_coeficient;
+    Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+    this.dash_particule.GetComponent<ArrowController>().activateControls(this, this.bullet_time_timeout);
+  }
+
+  public void endParticuleDash(Vector2 direction_normalized) {
+    this.bullet_time_active = false;
+
+    Time.timeScale = 1.0f;
+    Time.fixedDeltaTime = 0.02f;
+
+    this.rgbd.position = this.dash_particule.transform.position;
+    this.rgbd.velocity = direction_normalized * dash_speed;
+  }
+
   /////////////////////////////////////////////////////
   /// Collision/Trigger methods
   ////////////////////////////////////////////////////
 
   public void OnFeetTriggerEnter(Collider2D coll) {
-    if (coll.gameObject.tag != "UI") {
-        setGrounded(true);
+    if (!ignoreCollider2D(coll)) {
+      setGrounded(true);
     }
   }
   public void OnFeetTriggerStay(Collider2D coll) {
@@ -206,7 +266,7 @@ public class Player : MonoBehaviour
   }
   
   public void OnSideTriggerEnter(Collider2D coll) {
-    if (coll.gameObject.tag != "UI") {
+    if (!ignoreCollider2D(coll)) {
       if (coll.GetContacts(contacts) > 0) {
         float dir_x = (contacts[0].point.x - transform.position.x);
         setWallSliding(true, (dir_x > 0) ? Vector2.right : Vector2.left);
@@ -221,7 +281,7 @@ public class Player : MonoBehaviour
   }
 
   public void OnHeadTriggerEnter(Collider2D coll) {
-    if (coll.gameObject.tag != "UI") {
+    if (!ignoreCollider2D(coll)) {
       float gravity = (Physics2D.gravity * gravity_coefficient).y;
       if (velocity.y > -gravity) {
         velocity.y = -gravity;
@@ -230,6 +290,10 @@ public class Player : MonoBehaviour
   }
   public void OnHeadTriggerStay(Collider2D coll) {
     OnHeadTriggerEnter(coll);
+  }
+
+  public bool ignoreCollider2D(Collider2D c) {
+    return (c.gameObject.tag == "UI" || c.gameObject.tag == "Particule");
   }
 
 }
