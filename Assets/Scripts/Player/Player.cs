@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
   public float wall_jump_speed_y = 1.0f;
   public float wall_jump_speed_x = 1.0f;
 
+  [Header("Animation")]
+  public Animator animator;
+
   // constants:
   // BLA BLAH
 
@@ -31,6 +34,7 @@ public class Player : MonoBehaviour
   protected bool wall_sliding = false;
   protected Vector2 wall_side;
   protected bool has_air_jumped = false;
+  protected bool facing_right = true;
 
   // inputs:
   protected Vector2 input;
@@ -67,6 +71,7 @@ public class Player : MonoBehaviour
       }
     }
 
+
     if (grounded) {
       velocity.x *= 1.0f - ground_drag;
     }
@@ -102,6 +107,15 @@ public class Player : MonoBehaviour
       velocity.y = -max_fall_speed;
     }
 
+    if ((x_movement > 0.05f || velocity.x > 1) && !facing_right) {
+      flip();
+    }
+    else if ((x_movement < -0.05f || velocity.x < -1) && facing_right) {
+      flip();
+    }
+
+    animate();
+
     rgbd.velocity = velocity;
   }
   
@@ -123,6 +137,44 @@ public class Player : MonoBehaviour
     if (this.wall_sliding) {
       has_air_jumped = false;
     }
+  }
+
+  protected void animate() {
+    if (grounded) {
+      animator.SetBool("jumping", false);
+      animator.SetBool("falling", false);
+
+      if(Mathf.Abs(velocity.x) > 0.1f) {
+        animator.SetBool("walking", true);
+      }
+      else {
+        animator.SetBool("walking", false);
+      }
+    }
+    else {
+      animator.SetBool("walking", false);
+
+      if(velocity.y > 0.1f) {
+        animator.SetBool("jumping", true);
+        animator.SetBool("falling", false);
+      }
+      else if (velocity.y < -0.1f) {
+        animator.SetBool("jumping", false);
+        animator.SetBool("falling", true);
+      }
+    }
+
+  }
+
+  protected void flip()
+  {
+    // Switch the way the player is labelled as facing.
+    facing_right = !facing_right;
+
+    // Multiply the player's x local scale by -1.
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+    transform.localScale = theScale;
   }
 
   public void OnFeetTriggerEnter(Collider2D coll) {
