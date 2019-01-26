@@ -19,7 +19,10 @@ public class basic_movement : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+        float getJump = Input.GetAxis("Jump");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         rb2d.AddForce(movement*speed);
+        Vector2 jump = new Vector2(0, getJump * 10);
+        rb2d.AddForce(jump * speed);
     }
 }
