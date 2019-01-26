@@ -121,6 +121,13 @@ public class Player : MonoBehaviour
     }
   }
 
+  public void OnCollisionEnter2D(Collision2D coll) {
+    float gravity = (Physics2D.gravity * gravity_coefficient).y;
+    if (velocity.y > -gravity) {
+      velocity.y = -gravity;
+    }
+  }
+
   public void OnGroundCollisionEnter(Collision2D coll) {
     setGrounded(true);
   }
