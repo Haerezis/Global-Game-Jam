@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 
   // misc:
   protected Rigidbody2D rgbd;
+  protected ContactPoint2D[] contacts = new ContactPoint2D[10];
 
   void Awake() {
     this.rgbd = this.gameObject.GetComponent<Rigidbody2D>();
@@ -108,7 +109,10 @@ public class Player : MonoBehaviour
     this.grounded = val;
 
     if (!this.grounded) {
-      has_air_jumped = false;
+      this.has_air_jumped = false;
+    }
+    else {
+      this.wall_sliding = false;
     }
   }
 
@@ -121,28 +125,37 @@ public class Player : MonoBehaviour
     }
   }
 
-  public void OnCollisionEnter2D(Collision2D coll) {
+  public void OnFeetTriggerEnter(Collider2D coll) {
+    setGrounded(true);
+  }
+  public void OnFeetTriggerStay(Collider2D coll) {
+    OnFeetTriggerEnter(coll);
+  }
+  public void OnFeetTriggerExit(Collider2D coll) {
+    setGrounded(false);
+  }
+  
+  public void OnSideTriggerEnter(Collider2D coll) {
+    if (coll.GetContacts(contacts) > 0) {
+      float dir_x = (contacts[0].point.x - transform.position.x);
+      setWallSliding(true, (dir_x > 0) ? Vector2.right : Vector2.left);
+    }
+  }
+  public void OnSideTriggerStay(Collider2D coll) {
+    OnSideTriggerEnter(coll);
+  }
+  public void OnSideTriggerExit(Collider2D coll) {
+    setWallSliding(false, Vector2.zero);
+  }
+
+  public void OnHeadTriggerEnter(Collider2D coll) {
     float gravity = (Physics2D.gravity * gravity_coefficient).y;
     if (velocity.y > -gravity) {
       velocity.y = -gravity;
     }
   }
-
-  public void OnGroundCollisionEnter(Collision2D coll) {
-    setGrounded(true);
-  }
-  public void OnGroundCollisionExit(Collision2D coll) {
-    setGrounded(false);
-  }
-  
-  public void OnWallCollisionEnter(Collision2D coll) {
-    Vector2 dir = (coll.GetContact(0).point - (Vector2)transform.position);
-    dir = (dir.x > 0) ? Vector2.right : Vector2.left;
-
-    setWallSliding(true, dir);
-  }
-  public void OnWallCollisionExit(Collision2D coll) {
-    setWallSliding(false, Vector2.zero);
+  public void OnHeadTriggerStay(Collider2D coll) {
+    OnHeadTriggerEnter(coll);
   }
 
 }

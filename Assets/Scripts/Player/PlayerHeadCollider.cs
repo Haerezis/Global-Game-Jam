@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGroundCollider : MonoBehaviour
+public class PlayerHeadCollider : MonoBehaviour
 {
   Player player;
 
@@ -11,13 +11,14 @@ public class PlayerGroundCollider : MonoBehaviour
     player = transform.parent.gameObject.GetComponent<Player>();
   }
 
-  void OnCollisionEnter2D(Collision2D coll)
+  void OnTriggerEnter2D(Collider2D coll)
   {
-    player.OnGroundCollisionEnter(coll);
+    player.OnHeadTriggerEnter(coll);
   }
 
-  void OnCollisionExit2D(Collision2D coll)
+  void OnTriggerStay2D(Collider2D coll)
   {
-    player.OnGroundCollisionExit(coll);
+    player.OnHeadTriggerStay(coll);
   }
+
 }
