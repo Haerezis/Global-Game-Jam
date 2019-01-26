@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
   [Header("Air Jump")]
   // air_jump_speed => jump_speed * air_jump_speed_coeff
   public float air_jump_speed_coefficient = 1.0f;
+  public float wall_jump_speed_y = 1.0f;
+  public float wall_jump_speed_x = 1.0f;
 
   // constants:
   // BLA BLAH
@@ -26,7 +28,8 @@ public class Player : MonoBehaviour
   protected Vector2 velocity;
 
   protected bool grounded = false;
-  protected bool wallSliding = false;
+  protected bool wall_sliding = false;
+  protected Vector2 wall_side;
   protected bool hasAirJumped = false;
 
   // inputs:
@@ -70,8 +73,13 @@ public class Player : MonoBehaviour
       velocity.x *= 1.0f - air_drag;
     }
 
+    // Handle Jumps (normal, air, wall)
     if (Input.GetButtonDown ("Jump")) {
-      if (grounded) {
+      if (wall_sliding) {
+        velocity.x = wall_jump_speed_x * (-1) * wall_side.x;
+        velocity.y = wall_jump_speed_y;
+      }
+      else if (grounded) {
         velocity.y = jump_speed;
       }
       else if (!hasAirJumped) {
@@ -100,6 +108,15 @@ public class Player : MonoBehaviour
     this.grounded = val;
 
     if (!this.grounded) {
+      hasAirJumped = false;
+    }
+  }
+
+  public void setWallSliding(bool val, Vector2 side) {
+    this.wall_sliding = !grounded && val;
+    this.wall_side = side;
+
+    if (this.wall_sliding) {
       hasAirJumped = false;
     }
   }

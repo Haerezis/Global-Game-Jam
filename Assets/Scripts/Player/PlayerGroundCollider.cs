@@ -22,11 +22,6 @@ public class PlayerGroundCollider : MonoBehaviour
     player.setGrounded(true);
   }
 
-  void OnCollisionStay2D(Collision2D coll)
-  {
-    player.setGrounded(true);
-  }
-
   void OnCollisionExit2D(Collision2D coll)
   {
     player.setGrounded(false);
