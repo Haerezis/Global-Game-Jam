@@ -18,12 +18,22 @@ public class water_scrolling : MonoBehaviour
     void LateUpdate()
     {
         Vector3 waterPosition = this.gameObject.transform.position;
-        Vector3 waterScale = this.gameObject.transform.localScale;
-        
-        waterScale.y += waterSpeed * Time.deltaTime;
-        waterPosition.y += 0.5f * waterSpeed * Time.deltaTime;
+        Vector3 playerPosition = GameObject.FindWithTag("Player").transform.position;
+
+        float spatialDelay = playerPosition.y - waterPosition.y;
+
+        if (spatialDelay > 100.0)
+        {
+            waterPosition.y += 3 * waterSpeed * Time.deltaTime;
+        }
+        else
+        {
+            waterPosition.y += (0.02f * spatialDelay + 1f) * waterSpeed * Time.deltaTime;
+        }
+
+        Debug.Log(spatialDelay);
+
         this.gameObject.transform.position = waterPosition;
-        this.gameObject.transform.localScale = waterScale;
 
     }
 }
