@@ -37,3 +37,8 @@ sysinfo.txt
 
 Assets/config.cfg.txt
 Assets/save.txt
+GlobalGameJam_Data/
+MonoBleedingEdge/
+UnityCrashHandler64.exe
+UnityPlayer.dll
+WinPixEventRuntime.dll
