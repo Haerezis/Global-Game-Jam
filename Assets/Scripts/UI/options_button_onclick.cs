@@ -19,6 +19,9 @@ public class options_button_onclick : MonoBehaviour
     // Update is called once per frame
     void OptionOnClick()
     {
-        SceneManager.LoadScene("OptionScene");
+        if(!Input.GetButtonDown("Jump"))
+        {
+            SceneManager.LoadScene("OptionScene");
+        }
     }
 }
