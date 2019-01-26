@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
     this.renderer = this.gameObject.GetComponent<SpriteRenderer>();
   }
   
-  // Update is called once per frame
   void Update()
   {
     ComputeVelocity();
@@ -130,13 +129,15 @@ public class Player : MonoBehaviour
     }
   }
 
-  public void die() {
+  // Kill the player (make it invisible and non interactible) => waiting to be respawn.
+  public void kill() {
     // Death animation
     this.rgbd.velocity = Vector2.zero;
     this.rgbd.isKinematic = true;
     this.renderer.enabled = false;
   }
 
+  // Spawn the player at the given position.
   public void spawn(Vector2 position) {
     this.grounded = false;
     this.wall_sliding = false;
@@ -149,6 +150,7 @@ public class Player : MonoBehaviour
     this.renderer.enabled = true;
   }
 
+  // Set animator parameters to display the right animation
   protected void animate() {
     if (grounded) {
       animator.SetBool("jumping", false);
@@ -176,6 +178,7 @@ public class Player : MonoBehaviour
 
   }
 
+  // Flip the localScale of the player (to reuse same sprite when going left & right).
   protected void flip() {
     // Switch the way the player is labelled as facing.
     facing_right = !facing_right;
@@ -185,6 +188,10 @@ public class Player : MonoBehaviour
 		theScale.x *= -1;
     transform.localScale = theScale;
   }
+
+  /////////////////////////////////////////////////////
+  /// Collision/Trigger methods
+  ////////////////////////////////////////////////////
 
   public void OnFeetTriggerEnter(Collider2D coll) {
     setGrounded(true);
