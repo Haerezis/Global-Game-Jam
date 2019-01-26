@@ -6844,12 +6844,17 @@ PrefabInstance:
     - target: {fileID: 1326014174090881537, guid: 2af74562a267b40ff94b804978269bf5,
         type: 3}
       propertyPath: air_drag
-      value: 0.366
+      value: 0.325
       objectReference: {fileID: 0}
     - target: {fileID: 1326014174090881537, guid: 2af74562a267b40ff94b804978269bf5,
         type: 3}
       propertyPath: air_jump_speed_coefficient
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326014174090881537, guid: 2af74562a267b40ff94b804978269bf5,
+        type: 3}
+      propertyPath: wall_jump_speed_x
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2af74562a267b40ff94b804978269bf5, type: 3}
