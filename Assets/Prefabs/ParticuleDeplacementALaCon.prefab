@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2830132105887784634}
   - component: {fileID: 2830132105887784633}
-  - component: {fileID: 2830132105887784632}
   - component: {fileID: 2830132105887784639}
   - component: {fileID: 2830132105887784638}
+  - component: {fileID: 7044482219241951603}
   m_Layer: 0
   m_Name: ParticuleDeplacementALaCon
   m_TagString: Untagged
@@ -82,21 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2830132105887784632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2830132105887784637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c575153a566e69a41a989c6ad57ba3df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1.5
-  direction: 0
-  distance: 4
 --- !u!61 &2830132105887784639
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,3 +129,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7044482219241951603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2830132105887784637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d68d8c0674c0121eb90f94dd3a64bad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1.5
+  direction: 0
+  distance: 0
