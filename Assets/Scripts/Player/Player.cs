@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+  public LayerMask groundLayer;
+
   [Header("Movement")]
   public float horizontal_ground_speed = 1.0f;
   [Range(0, 1f)]
@@ -15,6 +17,7 @@ public class Player : MonoBehaviour
   [Range(0, 1f)]
   public float air_drag = 0.05f;
 
+  public float distance = 1.0f;
   // constants:
   // BLA BLAH
 
@@ -66,7 +69,6 @@ public class Player : MonoBehaviour
       velocity.x *= 1.0f - air_drag;
     }
 
-
     if (Input.GetButtonDown ("Jump")) {
       if (grounded) {
         velocity.y = jump_speed;
@@ -80,22 +82,12 @@ public class Player : MonoBehaviour
     else if (velocity.y < 0) {
       velocity.y = 0.0f;
     }
+    Debug.Log(velocity);
 
     rgbd.MovePosition(rgbd.position + velocity * Time.deltaTime);
   }
 
-  void OnCollisionEnter2D(Collision2D coll)
-  {
-    if (coll.gameObject.CompareTag("Ground")) grounded = true;
-  }
-
-  void OnCollisionStay2D(Collision2D coll)
-  {
-    if (coll.gameObject.CompareTag("Ground")) grounded = true;
-  }
-
-  void OnCollisionExit2D(Collision2D coll)
-  {
-    if (coll.gameObject.CompareTag("Ground")) grounded = false;
+  public void setGrounded(bool val) {
+    this.grounded = val;
   }
 }
