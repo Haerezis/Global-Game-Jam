@@ -10,6 +10,7 @@ TextureImporter:
     21300010: damground_5
     21300012: damground_6
     21300014: damground_7
+    21300016: damground_8
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -106,7 +107,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ca23a54a5eefb346ae9c7222e8c87a9
+      spriteID: d84bf68c4c87b144db79fbdc8fa69840
       vertices: []
       indices: 
       edges: []
@@ -126,7 +127,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: daedb7d4d662c5444b69751043e532f4
+      spriteID: b0f47855192c72e479a9e31ab31b050a
       vertices: []
       indices: 
       edges: []
@@ -146,7 +147,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3024927d850f6e942aa4ebb0e35984bf
+      spriteID: 0fb33658b541d5546b74df52824f268d
       vertices: []
       indices: 
       edges: []
@@ -166,7 +167,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 364344c60584ca041a659e81859fff5d
+      spriteID: f1354215987c43b4eb8e2895e7a65e5b
       vertices: []
       indices: 
       edges: []
@@ -186,7 +187,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 520b69ca66d6a7c43bf53786f08d96e3
+      spriteID: 879731541c6a1ad4fb61321bdb3e49e0
       vertices: []
       indices: 
       edges: []
@@ -206,7 +207,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6e3a0e7834ae8f4fbee18d3035115b4
+      spriteID: 82c2f117821d43646a4c9cf2689396b8
       vertices: []
       indices: 
       edges: []
@@ -226,7 +227,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8e127e3b51f1684f9e21d3be56d77e9
+      spriteID: c1365b57759aa42438df1db4ea012f04
       vertices: []
       indices: 
       edges: []
@@ -246,7 +247,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f960d7808cfa57b4c9ad72de91952f57
+      spriteID: e7d093d2d114a974dad4b6d84d222d9c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damground_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce4371897358a7a41bb55bdb69d85ab5
       vertices: []
       indices: 
       edges: []
