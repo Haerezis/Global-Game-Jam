@@ -27,8 +27,8 @@ public class newgame_button_onclick : MonoBehaviour
             using (Stream stream = File.Open("Assets/save.txt", FileMode.Truncate, FileAccess.Write))
             using (TextWriter wr = new StreamWriter(stream, Encoding.UTF8))
             {
-                wr.Write("MainMenuScene");
-                SceneManager.LoadScene("MainMenuScene");
+                wr.Write("lvl00_Tutorial");
+                SceneManager.LoadScene("lvl00_Tutorial");
                 Debug.Log("Rewritted file");
             }
         }

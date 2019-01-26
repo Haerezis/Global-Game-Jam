@@ -194,7 +194,10 @@ public class Player : MonoBehaviour
   ////////////////////////////////////////////////////
 
   public void OnFeetTriggerEnter(Collider2D coll) {
-    setGrounded(true);
+        if (coll.gameObject.tag != "UI")
+        {
+            setGrounded(true);
+        }
   }
   public void OnFeetTriggerStay(Collider2D coll) {
     OnFeetTriggerEnter(coll);
@@ -204,10 +207,14 @@ public class Player : MonoBehaviour
   }
   
   public void OnSideTriggerEnter(Collider2D coll) {
-    if (coll.GetContacts(contacts) > 0) {
-      float dir_x = (contacts[0].point.x - transform.position.x);
-      setWallSliding(true, (dir_x > 0) ? Vector2.right : Vector2.left);
-    }
+        if (coll.gameObject.tag != "UI")
+        {
+            if (coll.GetContacts(contacts) > 0)
+            {
+                float dir_x = (contacts[0].point.x - transform.position.x);
+                setWallSliding(true, (dir_x > 0) ? Vector2.right : Vector2.left);
+            }
+        }
   }
   public void OnSideTriggerStay(Collider2D coll) {
     OnSideTriggerEnter(coll);
@@ -217,10 +224,16 @@ public class Player : MonoBehaviour
   }
 
   public void OnHeadTriggerEnter(Collider2D coll) {
-    float gravity = (Physics2D.gravity * gravity_coefficient).y;
-    if (velocity.y > -gravity) {
-      velocity.y = -gravity;
-    }
+        if (coll.gameObject.tag != "UI")
+        {
+            float gravity = (Physics2D.gravity * gravity_coefficient).y;
+            if (velocity.y > -gravity)
+            {
+                velocity.y = -gravity;
+
+            }
+        }
+
   }
   public void OnHeadTriggerStay(Collider2D coll) {
     OnHeadTriggerEnter(coll);

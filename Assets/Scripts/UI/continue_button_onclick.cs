@@ -24,7 +24,6 @@ public class continue_button_onclick : MonoBehaviour
     {
         if (!(Input.GetButtonDown("Jump")))
         {
-
             using (Stream stream = File.Open("Assets/save.txt", FileMode.Open))
             using (TextReader sr = new StreamReader(stream, Encoding.UTF8))
             {
