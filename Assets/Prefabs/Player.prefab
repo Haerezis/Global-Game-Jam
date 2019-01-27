@@ -338,7 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontal_ground_speed: 18
   ground_drag: 0.4
-  jump_speed: 15
+  jump_speed: 50
   horizontal_air_speed: 14
   gravity_coefficient: 0.1
   reinforced_jump_speed: 0.5
@@ -348,9 +348,9 @@ MonoBehaviour:
   wall_jump_speed_y: 15
   wall_jump_speed_x: 40
   animator: {fileID: 7132645268348991724}
-  bullet_time_coeficient: 0.1
+  bullet_time_coeficient: 0.05
   bullet_time_timeout: 4
-  dash_speed: 500
+  dash_speed: 140
 --- !u!61 &1131939550604615569
 BoxCollider2D:
   m_ObjectHideFlags: 0
