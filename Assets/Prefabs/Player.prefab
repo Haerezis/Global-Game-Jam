@@ -345,7 +345,7 @@ MonoBehaviour:
   air_drag: 0.28
   max_fall_speed: 30
   air_jump_speed_coefficient: 0.75
-  wall_jump_speed_y: 15
+  wall_jump_speed_y: 30
   wall_jump_speed_x: 40
   animator: {fileID: 7132645268348991724}
   bullet_time_coeficient: 0.05

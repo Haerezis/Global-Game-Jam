@@ -13393,7 +13393,7 @@ PrefabInstance:
     - target: {fileID: 6484559531419914465, guid: c87e921257605fd4ba9c48d6b2f20dae,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6484559531419914470, guid: c87e921257605fd4ba9c48d6b2f20dae,
         type: 3}
@@ -15238,9 +15238,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1529554327}
   - component: {fileID: 1529554326}
+  - component: {fileID: 1529554328}
   m_Layer: 0
   m_Name: gemme_jaune
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15301,12 +15302,38 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529554325}
   m_LocalRotation: {x: -0, y: -0, z: 0.0029637925, w: 0.99999565}
-  m_LocalPosition: {x: -2.3801184, y: 38.869232, z: 0}
-  m_LocalScale: {x: 0.4680901, y: 0.43466043, z: 1.1754351}
+  m_LocalPosition: {x: -2.41, y: 38.869232, z: 0}
+  m_LocalScale: {x: 0.45638785, y: 0.43466043, z: 1.1754351}
   m_Children: []
   m_Father: {fileID: 1631989790}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.34}
+--- !u!61 &1529554328
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529554325}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.09298658, y: 0.62809753}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 5.12}
+    newSize: {x: 5.12, y: 5.12}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.544942, y: 3.4457302}
+  m_EdgeRadius: 0
 --- !u!1 &1577299418
 GameObject:
   m_ObjectHideFlags: 0
