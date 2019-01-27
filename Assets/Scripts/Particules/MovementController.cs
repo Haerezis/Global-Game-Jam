@@ -61,7 +61,7 @@ public class MovementController : MonoBehaviour
         {
             if (Vector3.Distance(positionFinale, transform.position) > 0.2) //si on est arrivé au bout à gauche
             {
-                this.rb2D.velocity = vectorGo;
+                this.rb2D.velocity = vectorGo * speed;
             }
             else
             {
@@ -72,7 +72,7 @@ public class MovementController : MonoBehaviour
         {
             if (Vector3.Distance(positionInitiale, transform.position) > 0.2) //si on est arrivé au bout à gauche
             {
-                rb2D.velocity = vectorReturn;
+                rb2D.velocity = vectorReturn * speed;
             }
             else
             {
