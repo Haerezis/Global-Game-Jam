@@ -341,7 +341,7 @@ MonoBehaviour:
   jump_speed: 20
   horizontal_air_speed: 14
   gravity_coefficient: 0.1
-  air_drag: 0.35
+  air_drag: 0.2
   max_fall_speed: 30
   air_jump_speed_coefficient: 0.75
   wall_jump_speed_y: 15
