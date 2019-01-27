@@ -61,7 +61,6 @@ public class Player : MonoBehaviour
   {
     if (Input.GetButtonDown("Fire1") && this.dash_particule != null) {
       this.beginParticuleDash();
-      //this.endParticuleDash((Vector2.right + Vector2.up).normalized);
     }
 
     float x_movement = 0.0f;
@@ -84,7 +83,11 @@ public class Player : MonoBehaviour
       }
       else {
         velocity.x *= 1.0f - air_drag;
+        if (velocity.y > 5.0f) {
+          velocity.y *= 1.0f - air_drag;
+        }
       }
+
 
       // Handle Jumps (normal, air, wall)
       if (Input.GetButtonDown ("Jump")) {
@@ -101,7 +104,7 @@ public class Player : MonoBehaviour
         }
       }
       else if (Input.GetButton("Jump")) {
-        if (!grounded) {
+        if (!grounded && velocity.y > 0) {
           velocity.y += this.reinforced_jump_speed;
         }
       }
@@ -251,8 +254,8 @@ public class Player : MonoBehaviour
     Time.timeScale = 1.0f;
     Time.fixedDeltaTime = 0.02f;
 
+    this.rgbd.velocity = this.velocity = direction_normalized * dash_speed;
     this.rgbd.position = this.dash_particule.transform.position;
-    this.rgbd.velocity = direction_normalized * dash_speed;
   }
 
   /////////////////////////////////////////////////////
