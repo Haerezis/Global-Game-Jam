@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 
   protected bool bullet_time_active = false;
   protected GameObject dash_particule = null;
+  protected bool ignore_next_particule_dash = false;
 
   // misc:
   protected Rigidbody2D rgbd;
@@ -60,7 +61,10 @@ public class Player : MonoBehaviour
   protected void ComputeVelocity()
   {
     if (Input.GetButtonDown("Fire1") && this.dash_particule != null) {
-      this.beginParticuleDash();
+      if (!this.ignore_next_particule_dash) {
+        this.beginParticuleDash();
+      }
+      this.ignore_next_particule_dash = false;
     }
 
     float x_movement = 0.0f;
@@ -250,6 +254,7 @@ public class Player : MonoBehaviour
 
   public void endParticuleDash(Vector2 direction_normalized) {
     this.bullet_time_active = false;
+    this.ignore_next_particule_dash = true;
 
     Time.timeScale = 1.0f;
     Time.fixedDeltaTime = 0.02f;
