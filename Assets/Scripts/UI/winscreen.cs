@@ -11,6 +11,7 @@ public class winscreen : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Time.timeScale = 0;
             SceneManager.LoadScene("WinScreenScene", LoadSceneMode.Additive);
         }
     }

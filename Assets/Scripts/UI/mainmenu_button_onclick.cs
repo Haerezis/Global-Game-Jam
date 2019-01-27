@@ -19,6 +19,7 @@ public class mainmenu_button_onclick : MonoBehaviour
     // Update is called once per frame
     void MainMenuOnClick()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenuScene");
     }
 }

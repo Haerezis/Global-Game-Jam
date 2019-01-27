@@ -24,16 +24,17 @@ public class continue_button_onclick : MonoBehaviour
     {
         if (!(Input.GetButtonDown("Jump")))
         {
-            using (Stream stream = File.Open("Assets/save.txt", FileMode.Open))
-            using (TextReader sr = new StreamReader(stream, Encoding.UTF8))
-            {
-                string levelScene;
-                if ((levelScene = sr.ReadLine()) != null)
-                {
-                    SceneManager.LoadScene(levelScene);
-                    Debug.Log("SceneLoaded");
-                }
-            }
+            //using (Stream stream = File.Open("Assets/save.txt", FileMode.Open))
+            //using (TextReader sr = new StreamReader(stream, Encoding.UTF8))
+            //{
+            //    string levelScene;
+            //    if ((levelScene = sr.ReadLine()) != null)
+            //    {
+            //        SceneManager.LoadScene(levelScene);
+            //        Debug.Log("SceneLoaded");
+            //    }
+            //}
+            SceneManager.LoadScene("lvl00_Tutorial");
         }
     }
 }

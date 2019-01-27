@@ -15519,6 +15519,7 @@ GameObject:
   - component: {fileID: 1529554327}
   - component: {fileID: 1529554326}
   - component: {fileID: 1529554328}
+  - component: {fileID: 1529554329}
   m_Layer: 0
   m_Name: gemme_jaune
   m_TagString: UI
@@ -15614,6 +15615,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.544942, y: 3.4457302}
   m_EdgeRadius: 0
+--- !u!114 &1529554329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529554325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ac89dd9b6fb1e44be844b7dd1becbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1577299418
 GameObject:
   m_ObjectHideFlags: 0

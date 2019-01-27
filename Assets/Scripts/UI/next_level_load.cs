@@ -18,6 +18,7 @@ public class next_level_load : MonoBehaviour
 
     void NextLevelOnClick()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(nextScene);
     }
 }
