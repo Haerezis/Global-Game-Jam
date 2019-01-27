@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class water_scrolling : MonoBehaviour
 {
@@ -35,5 +37,18 @@ public class water_scrolling : MonoBehaviour
 
         this.gameObject.transform.position = waterPosition;
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Player player = collision.GetComponent<Player>();
+        if(player != null)
+        {
+            //provoque la mort du joueur
+            player.kill();
+            //écran mort ou redémarrer le niveau
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name, LoadSceneMode.Single);
+        }
     }
 }
