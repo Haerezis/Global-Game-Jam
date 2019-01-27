@@ -33,10 +33,14 @@ public class ArrowController : MonoBehaviour
 
   void rotateArrow() {
     Vector2 input = new Vector2(Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
-    if ( input.sqrMagnitude >= 1.0f ) {
-      this.arrow.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, input) - 43.0f);
-      this.arrow_direction = input.normalized;
+    if ( input.sqrMagnitude < 1.0f ) {
+      input = this.arrow_direction;
     }
+
+    float angle = (Vector2.SignedAngle(Vector2.right, input) - 43.0f);
+    angle = Mathf.Sign(transform.localScale.x) < 0 ? angle - 90.0f : angle;
+    this.arrow.transform.rotation = Quaternion.Euler(0, 0, angle);
+    this.arrow_direction = input.normalized;
   }
 
   void OnTriggerEnter2D(Collider2D c) {
