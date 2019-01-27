@@ -338,9 +338,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontal_ground_speed: 18
   ground_drag: 0.4
-  jump_speed: 20
+  jump_speed: 15
   horizontal_air_speed: 14
   gravity_coefficient: 0.1
+  reinforced_jump_speed: 0.5
   air_drag: 0.2
   max_fall_speed: 30
   air_jump_speed_coefficient: 0.75
