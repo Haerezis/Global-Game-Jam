@@ -58,7 +58,6 @@ public class ArrowController : MonoBehaviour
   }
 
   public void activateControls(Player player, float timeout) {
-    Debug.Log("START");
     this.player = player;
     this.timeout_timestamp = Time.fixedUnscaledTime + timeout;
     this.arrow_direction = (this.transform.position - player.gameObject.transform.position).normalized;
@@ -68,10 +67,8 @@ public class ArrowController : MonoBehaviour
   }
 
   public void finishParticuleDash() {
-    Debug.Log("FINISH");
     this.in_progress = false;
     this.arrow.GetComponent<SpriteRenderer>().enabled = false;
-    Debug.Log(this.arrow_direction);
     this.player.endParticuleDash(this.arrow_direction);
   }
 }

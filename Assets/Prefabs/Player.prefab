@@ -347,6 +347,9 @@ MonoBehaviour:
   wall_jump_speed_y: 15
   wall_jump_speed_x: 40
   animator: {fileID: 7132645268348991724}
+  bullet_time_coeficient: 0.1
+  bullet_time_timeout: 4
+  dash_speed: 500
 --- !u!61 &1131939550604615569
 BoxCollider2D:
   m_ObjectHideFlags: 0
