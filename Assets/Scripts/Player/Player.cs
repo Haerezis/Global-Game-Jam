@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
       }
       else {
         velocity.x *= 1.0f - air_drag;
-        if (velocity.y > 5.0f) {
+        if (velocity.y > 0.0f) {
           velocity.y *= 1.0f - air_drag;
         }
       }
