@@ -21,8 +21,8 @@ public class Pikes : MonoBehaviour
         if (coll.collider.CompareTag("Player"))
         {
             Player player = coll.gameObject.GetComponent<Player>();
-            //if (player != null)
-                //player.kill();
+            if (player != null)
+                player.kill();
         }
     }
 }
