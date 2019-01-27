@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preparationTime: 0
-  waterSpeed: 2.2
+  waterSpeed: 2
 --- !u!68 &6484559531419914468
 EdgeCollider2D:
   m_ObjectHideFlags: 0

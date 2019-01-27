@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pikes : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Pikes : MonoBehaviour
             Player player = coll.gameObject.GetComponent<Player>();
             if (player != null)
                 player.kill();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
