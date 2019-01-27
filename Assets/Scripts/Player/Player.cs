@@ -276,7 +276,9 @@ public class Player : MonoBehaviour
     OnFeetTriggerEnter(coll);
   }
   public void OnFeetTriggerExit(Collider2D coll) {
-    setGrounded(false);
+    if (!ignoreCollider2D(coll)) {
+      setGrounded(false);
+    }
   }
   
   public void OnSideTriggerEnter(Collider2D coll) {
@@ -291,7 +293,9 @@ public class Player : MonoBehaviour
     OnSideTriggerEnter(coll);
   }
   public void OnSideTriggerExit(Collider2D coll) {
-    setWallSliding(false, Vector2.zero);
+    if (!ignoreCollider2D(coll)) {
+      setWallSliding(false, Vector2.zero);
+    }
   }
 
   public void OnHeadTriggerEnter(Collider2D coll) {
