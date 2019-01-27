@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Pikes : MonoBehaviour
 {
-
-    public string scene;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +24,7 @@ public class Pikes : MonoBehaviour
             Player player = coll.gameObject.GetComponent<Player>();
             if (player != null)
                 player.kill();
-            SceneManager.LoadScene(scene);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
