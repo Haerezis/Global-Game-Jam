@@ -100,12 +100,10 @@ public class Player : MonoBehaviour
           has_air_jumped = true;
         }
       }
-
-      if (Input.GetButton("Jump")) {
+      else if (Input.GetButton("Jump")) {
         if (!grounded) {
           velocity.y += this.reinforced_jump_speed;
         }
-
       }
     }
 
