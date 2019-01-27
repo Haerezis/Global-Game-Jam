@@ -164,7 +164,11 @@ public class Player : MonoBehaviour
     // Death animation
     this.rgbd.velocity = Vector2.zero;
     this.rgbd.isKinematic = true;
-    this.sprite_renderer.enabled = false;
+
+    this.animator.SetBool("jumping", false);
+    this.animator.SetBool("falling", false);
+    this.animator.SetBool("walking", false);
+    this.animator.SetBool("dead", true);
   }
 
   // Spawn the player at the given position.
