@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 
   protected bool bullet_time_active = false;
   protected GameObject dash_particule = null;
+  protected bool ignore_next_particule_dash = false;
 
   // misc:
   protected Rigidbody2D rgbd;
@@ -60,7 +61,10 @@ public class Player : MonoBehaviour
   protected void ComputeVelocity()
   {
     if (Input.GetButtonDown("Fire1") && this.dash_particule != null) {
-      this.beginParticuleDash();
+      if (!this.ignore_next_particule_dash) {
+        this.beginParticuleDash();
+      }
+      this.ignore_next_particule_dash = false;
     }
 
     float x_movement = 0.0f;
@@ -83,7 +87,7 @@ public class Player : MonoBehaviour
       }
       else {
         velocity.x *= 1.0f - air_drag;
-        if (velocity.y > 5.0f) {
+        if (velocity.y > 0.0f) {
           velocity.y *= 1.0f - air_drag;
         }
       }
@@ -160,7 +164,11 @@ public class Player : MonoBehaviour
     // Death animation
     this.rgbd.velocity = Vector2.zero;
     this.rgbd.isKinematic = true;
-    this.sprite_renderer.enabled = false;
+
+    this.animator.SetBool("jumping", false);
+    this.animator.SetBool("falling", false);
+    this.animator.SetBool("walking", false);
+    this.animator.SetBool("dead", true);
   }
 
   // Spawn the player at the given position.
@@ -250,6 +258,7 @@ public class Player : MonoBehaviour
 
   public void endParticuleDash(Vector2 direction_normalized) {
     this.bullet_time_active = false;
+    this.ignore_next_particule_dash = true;
 
     Time.timeScale = 1.0f;
     Time.fixedDeltaTime = 0.02f;
@@ -271,7 +280,9 @@ public class Player : MonoBehaviour
     OnFeetTriggerEnter(coll);
   }
   public void OnFeetTriggerExit(Collider2D coll) {
-    setGrounded(false);
+    if (!ignoreCollider2D(coll)) {
+      setGrounded(false);
+    }
   }
   
   public void OnSideTriggerEnter(Collider2D coll) {
@@ -286,7 +297,9 @@ public class Player : MonoBehaviour
     OnSideTriggerEnter(coll);
   }
   public void OnSideTriggerExit(Collider2D coll) {
-    setWallSliding(false, Vector2.zero);
+    if (!ignoreCollider2D(coll)) {
+      setWallSliding(false, Vector2.zero);
+    }
   }
 
   public void OnHeadTriggerEnter(Collider2D coll) {
