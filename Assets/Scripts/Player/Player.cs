@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
   public float jump_speed = 1.0f;
   public float horizontal_air_speed = 1.0f;
   public float gravity_coefficient = 1.0f;
+  public float reinforced_jump_speed = 0.4f;
   [Range(0, 1f)]
   public float air_drag = 0.05f;
   public float max_fall_speed = 30.0f;
@@ -97,6 +98,11 @@ public class Player : MonoBehaviour
         else if (!has_air_jumped) {
           velocity.y = jump_speed * air_jump_speed_coefficient;
           has_air_jumped = true;
+        }
+      }
+      else if (Input.GetButton("Jump")) {
+        if (!grounded) {
+          velocity.y += this.reinforced_jump_speed;
         }
       }
     }
