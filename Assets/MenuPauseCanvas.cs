@@ -35,6 +35,7 @@ public class MenuPauseCanvas : MonoBehaviour
        
         if(actualLevel != null)
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene(actualLevel, LoadSceneMode.Single);
             Debug.Log("Restart launched");
         }
@@ -42,12 +43,14 @@ public class MenuPauseCanvas : MonoBehaviour
 
     void OptionsClick()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(@"Scenes/OptionScene", LoadSceneMode.Single);
         Debug.Log("Options launched");
     }
 
     void QuitClick()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(@"Scenes/MainMenuScene", LoadSceneMode.Single);
         Debug.Log("Quit launched");
     }
