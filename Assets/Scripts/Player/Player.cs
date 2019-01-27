@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 
   protected void ComputeVelocity()
   {
-    if (Input.GetButtonDown("Fire1") && this.dash_particule != null) {
+    if (Input.GetButtonDown("Fire2") && this.dash_particule != null) {
       if (!this.ignore_next_particule_dash) {
         this.beginParticuleDash();
       }

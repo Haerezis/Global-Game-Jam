@@ -22,7 +22,7 @@ public class ArrowController : MonoBehaviour
   void FixedUpdate()
   {
     if(in_progress) {
-      if ((Input.GetButtonDown("Fire1") || ( Time.fixedUnscaledTime >= this.timeout_timestamp ))) {
+      if ((Input.GetButtonDown("Fire2") || ( Time.fixedUnscaledTime >= this.timeout_timestamp ))) {
         this.finishParticuleDash();
       }
       else {
