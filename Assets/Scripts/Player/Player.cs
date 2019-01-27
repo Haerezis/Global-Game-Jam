@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
   protected GameObject dash_particule = null;
   protected bool ignore_next_particule_dash = false;
 
+  protected Vector2 inherited_velocity = Vector2.zero;
+
   // misc:
   protected Rigidbody2D rgbd;
   protected ContactPoint2D[] contacts = new ContactPoint2D[10];
@@ -136,7 +138,7 @@ public class Player : MonoBehaviour
 
     animate();
 
-    rgbd.velocity = velocity;
+    rgbd.velocity = velocity + inherited_velocity;
   }
   
   public void setGrounded(bool val) {
@@ -157,6 +159,10 @@ public class Player : MonoBehaviour
     if (this.wall_sliding) {
       has_air_jumped = false;
     }
+  }
+
+  public void setInheritedVelocity(Vector2 val) {
+    this.inherited_velocity = val;
   }
 
   // Kill the player (make it invisible and non interactible) => waiting to be respawn.
