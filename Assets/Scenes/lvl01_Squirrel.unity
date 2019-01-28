@@ -11246,6 +11246,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6484559531419914464, guid: c87e921257605fd4ba9c48d6b2f20dae,
+        type: 3}
+      propertyPath: waterSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c87e921257605fd4ba9c48d6b2f20dae, type: 3}
 --- !u!1 &744214781
@@ -11279,7 +11284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb050b6a6b8d46b43a23ae293fadf0f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playZone: 0
+  playZone: 3
 --- !u!81 &744214783
 AudioListener:
   m_ObjectHideFlags: 0
